@@ -35,7 +35,7 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
   for (int i = 0; i < header.length; i++) {
     final headerName = header[i]?.value?.toString() ?? '';
 
-    if (headerName == '이름') {
+    if (headerName == '성명') {
       nameIdx = i;
     } else if (headerName == '금년생일') {
       disabilityTypeIdx = i;
@@ -54,18 +54,25 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
 
   List<User> users = [];
 
-  for (int i = 0; i < rows.length; i++) {
+  for (int i = 1; i < rows.length; i++) {
     final row = rows[i];
-    final rawSeverity = row[disabilityTypeIdx]?.value?.toString() ?? 'Unknown';
+    final rawSeverity = row[severityIdx]?.value?.toString() ?? 'Unknown';
+    final rawDisability = row[disabilityTypeIdx]?.value?.toString() ?? 'Unknown';
 
     users.add(
       User(
         name: row[nameIdx]?.value?.toString() ?? 'Unknown',
-        severity: row[severityIdx]?.value?.toString() ?? 'Unknown',
-        disabilityType: _processSeverity(rawSeverity),
+        severity: _processSeverity(rawSeverity),
+        disabilityType: _processDisability(rawDisability),
         rowNumber: i+1,
       ),
     );
+    /*
+    print(row[nameIdx]?.value?.toString() ?? 'Unknown');
+    print(_processSeverity(rawSeverity));
+    print(_processDisability(rawDisability));
+    print(i+1);
+    print("---------"); */
   }
 
   return users;
@@ -84,6 +91,40 @@ String _processSeverity(dynamic rawSeverity) {
     return '경증';
   } else if (['보호', '보호자'].contains(value)){
     return '보호자';
+  } else {
+    return '기타';
+  }
+}
+
+String _processDisability(dynamic rawDisability) {
+  final value = rawDisability?.toString().trim() ?? '';
+
+  if (value.contains('지체')) {
+    return '지체장애';
+  } else if (value.contains('청각')){
+    return '청각장애';
+  } else if (value.contains('보호자')){
+    return '보호자';
+  } else if (value.contains('시각')){
+    return '시각장애';
+  } else if (value.contains('뇌병변') || value.contains('간질')){
+    return '뇌병변장애';
+  } else if (value.contains('지적')) {
+    return '지적장애';
+  } else if (value.contains('정신')) {
+    return '정신장애';
+  } else if (value.contains('신장')) {
+    return '신장장애';
+  } else if (value.contains('자폐')) {
+    return '자폐성장애';
+  } else if (value.contains('호흡기')) {
+    return '호흡기장애';
+  } else if (value.contains('장루')) {
+    return '장루장애';
+  } else if (value.contains('심장')) {
+    return '심장장애';
+  } else if (value.contains('간')) {
+    return '간장애';
   } else {
     return '기타';
   }

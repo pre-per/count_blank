@@ -1,6 +1,8 @@
 import 'package:count_bath/widget/dropzone_widget.dart';
+import 'package:count_bath/widget/user_statics_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(ProviderScope(child: MyApp()));
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
             fontSize: 20.0,
           ),
         ),
+        textTheme: GoogleFonts.notoSansKrTextTheme(),
       ),
       home: Mainscreen(),
     );
@@ -38,11 +41,17 @@ class Mainscreen extends ConsumerWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(children: [
-          DropzoneWidget(),
-          const SizedBox(height: 10.0),
-
-        ]),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                DropzoneWidget(),
+                const SizedBox(height: 15.0),
+                UserStaticsWidget(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
