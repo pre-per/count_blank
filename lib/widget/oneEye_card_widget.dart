@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
-class UserdetailCardWidget extends StatelessWidget {
-  final String name;
-  final String severity;
-  final String disabilityType;
-  final String rowNumber;
+class OneeyeCardWidget extends StatelessWidget {
+  final String date;
+  final String content1;
+  final String content2;
+  final String content3;
+  final String content4;
+  final String totalNum;
 
-  const UserdetailCardWidget({
-    required this.name,
-    required this.severity,
-    required this.disabilityType,
-    required this.rowNumber,
+  const OneeyeCardWidget({
+    required this.date,
+    required this.content1,
+    required this.content2,
+    required this.content3,
+    required this.content4,
+    required this.totalNum,
     super.key,
   });
 
@@ -27,10 +31,10 @@ class UserdetailCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                flex: 3, // 이름은 좀 더 넓게
+                flex: 3,
                 child: Center(
                   child: Text(
-                    name.trim(),
+                    date,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                   ),
@@ -40,7 +44,7 @@ class UserdetailCardWidget extends StatelessWidget {
                 flex: 2,
                 child: Center(
                   child: Text(
-                    severity,
+                    content1,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                   ),
@@ -50,7 +54,7 @@ class UserdetailCardWidget extends StatelessWidget {
                 flex: 2,
                 child: Center(
                   child: Text(
-                    disabilityType,
+                    content2,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                   ),
@@ -60,7 +64,27 @@ class UserdetailCardWidget extends StatelessWidget {
                 flex: 2,
                 child: Center(
                   child: Text(
-                    rowNumber,
+                    content3,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Text(
+                    content4,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Text(
+                    totalNum,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w600),
                   ),

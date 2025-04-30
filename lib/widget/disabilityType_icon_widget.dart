@@ -35,9 +35,15 @@ class DisabilitytypeIconWidget extends StatelessWidget {
             children: [
               Icon(iconData, size: 50.0, color: Colors.blueGrey),
               const SizedBox(height: 6.0),
-              Text(title, style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500)),
+              Text(
+                title,
+                style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w500),
+              ),
               const SizedBox(height: 6.0),
-              Text('$peopleNumber명', style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600)),
+              Text(
+                (peopleNumber <= 0) ? '없음' : '$peopleNumber명',
+                style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.w600),
+              ),
             ],
           ),
         ),

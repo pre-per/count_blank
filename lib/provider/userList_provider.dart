@@ -1,5 +1,4 @@
 import 'package:count_bath/widget/dropzone_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:excel/excel.dart';
 import 'package:count_bath/model/user_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,6 +28,7 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
 
   final header = rows.first;
   int nameIdx = -1;
+  int dateIdx = -1;
   int disabilityTypeIdx = -1;
   int severityIdx = -1;
 
@@ -37,6 +37,8 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
 
     if (headerName == '성명') {
       nameIdx = i;
+    } else if (headerName == '거래일') {
+      dateIdx = i;
     } else if (headerName == '금년생일') {
       disabilityTypeIdx = i;
     } else if (headerName == '금년기념') {
@@ -44,8 +46,8 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
     }
   }
 
-  if (nameIdx == -1 || disabilityTypeIdx == -1 || severityIdx == -1) {
-    throw Exception('필수 열(이름/금년기념/금년생일)을 찾을 수 없습니다.');
+  if (nameIdx == -1 || dateIdx == -1 || disabilityTypeIdx == -1 || severityIdx == -1) {
+    throw Exception('필수 열(성명/거래일/금년기념/금년생일)을 찾을 수 없습니다.');
   }
 
   // --------------------
@@ -62,17 +64,12 @@ final userListProvider = FutureProvider<List<User>>((ref) async {
     users.add(
       User(
         name: row[nameIdx]?.value?.toString() ?? 'Unknown',
+        date: row[dateIdx]?.value?.toString() ?? 'Unknown',
         severity: _processSeverity(rawSeverity),
         disabilityType: _processDisability(rawDisability),
         rowNumber: i+1,
       ),
     );
-    /*
-    print(row[nameIdx]?.value?.toString() ?? 'Unknown');
-    print(_processSeverity(rawSeverity));
-    print(_processDisability(rawDisability));
-    print(i+1);
-    print("---------"); */
   }
 
   return users;
