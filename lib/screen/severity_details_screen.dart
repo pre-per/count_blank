@@ -2,7 +2,7 @@ import 'package:count_bath/widget/userDetail_card_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../model/user_model.dart';
-
+//
 class SeverityDetailsScreen extends StatelessWidget {
   final String title;
   final List<User> users;
